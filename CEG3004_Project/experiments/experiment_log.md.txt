@@ -1,0 +1,120 @@
+# Experiment Log
+
+## Objective
+
+The goal of the experiments was to improve robustness of environmental sound classification under clean, noisy, and band-limited conditions.
+
+The focus was not only on model performance, but also on meaningful DSP feature design and reproducibility.
+
+---
+
+## Experiment 1 – Baseline Pipeline Review
+
+**Setup**
+- Started from the provided notebook baseline
+- Reviewed all editable TODO sections
+- Confirmed dataset loading, safety checks, and output naming with `GROUP_ID`
+
+**Observation**
+The baseline gave a structured starting point, but there was room to improve preprocessing, augmentation, feature richness, and model robustness.
+
+---
+
+## Experiment 2 – Improved Preprocessing
+
+**Changes**
+- added pre-emphasis filtering
+- trimmed silence
+- standardized all clips to fixed 5-second length
+- applied RMS normalization
+
+**Purpose**
+To create cleaner and more consistent input signals before feature extraction.
+
+**Observation**
+This improved feature consistency across clips and helped prepare the model for varied signal conditions.
+
+---
+
+## Experiment 3 – Robustness-Oriented Augmentation
+
+**Changes**
+- additive white noise
+- random low-pass filtering
+- gain variation
+- time stretching
+- pitch shifting
+- time masking
+- combined augmentation strategy
+
+**Purpose**
+To simulate realistic distortions similar to the noisy and band-limited evaluation conditions.
+
+**Observation**
+Augmentation increased training diversity and made the pipeline more robustness-focused.
+
+---
+
+## Experiment 4 – Rich DSP Feature Expansion
+
+**Changes**
+Expanded the feature set beyond basic MFCC by including:
+- MFCC, delta, delta-delta
+- log-mel statistics with CMVN
+- spectral centroid
+- spectral bandwidth
+- spectral rolloff
+- spectral flatness
+- zero crossing rate
+- spectral contrast
+- chroma
+- tonnetz
+- RMS energy statistics
+- temporal autocorrelation and envelope features
+- wider-window MFCC representation
+
+**Purpose**
+To combine timbral, spectral, tonal, energy, and temporal information into a single feature vector.
+
+**Observation**
+A richer feature representation is better aligned with environmental sound diversity and robustness needs.
+
+---
+
+## Experiment 5 – Ensemble Model Development
+
+**Changes**
+Replaced a simple baseline classifier with an ensemble voting model using:
+- HistGradientBoostingClassifier
+- RandomForestClassifier
+- ExtraTreesClassifier
+
+**Purpose**
+To improve generalization and reduce dependence on a single learning method.
+
+**Observation**
+The ensemble approach provided a stronger final modeling strategy for high-dimensional engineered features.
+
+---
+
+## Final Selected Approach
+
+The final submission pipeline uses:
+- improved preprocessing
+- multiple waveform augmentations
+- broad DSP feature engineering
+- ensemble-based classification
+- automatic generation of model and prediction outputs
+
+This final approach was selected because it provided the most complete robustness-oriented solution while remaining structured and reproducible.
+
+---
+
+## Final Notes
+
+The project demonstrates that good performance in environmental sound classification is strongly influenced by:
+- signal preprocessing quality
+- appropriate augmentation
+- meaningful DSP design
+- disciplined experimentation
+- clean engineering workflow

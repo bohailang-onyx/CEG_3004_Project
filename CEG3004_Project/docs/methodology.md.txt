@@ -1,0 +1,174 @@
+
+## 2. `docs\methodology.md`
+
+```md
+# Methodology
+
+## Overview
+
+This project follows a structured DSP and machine learning workflow for environmental sound classification.
+
+The pipeline consists of:
+1. audio loading
+2. preprocessing
+3. augmentation
+4. feature extraction
+5. model training
+6. validation
+7. submission prediction
+
+---
+
+## 1. Audio Loading
+
+Audio files are loaded using `librosa.load()` with:
+- mono conversion
+- target sampling rate of 16 kHz
+
+This ensures consistent signal format across all clips.
+
+---
+
+## 2. Preprocessing
+
+The preprocessing stage includes several steps designed to improve robustness and feature consistency.
+
+### Pre-emphasis
+A pre-emphasis filter is applied using a coefficient of 0.97. This boosts higher-frequency content and helps highlight details that may otherwise be underrepresented.
+
+### Silence Trimming
+Leading and trailing silence is removed using `librosa.effects.trim()`.
+
+### Fixed-Length Standardization
+Each clip is standardized to exactly 5 seconds through truncation or zero-padding.
+
+### RMS Normalization
+The waveform is normalized using RMS energy scaling. This reduces variation caused by recording volume differences.
+
+---
+
+## 3. Augmentation
+
+The training pipeline includes augmentation to simulate expected distortions in the submission data.
+
+### Noise Augmentation
+White noise is added at a random SNR between 5 dB and 20 dB.
+
+### Band-Limiting
+A random low-pass Butterworth filter is applied with cutoff between 1 kHz and 4 kHz.
+
+### Gain Augmentation
+Random gain changes between -6 dB and +6 dB are applied.
+
+### Time Stretching
+Audio is stretched without changing pitch.
+
+### Pitch Shifting
+Audio is shifted by a random number of semitones.
+
+### Time Masking
+A random contiguous section of waveform samples is zeroed out.
+
+### Combined Augmentation
+A random combination of augmentation methods is applied probabilistically to improve diversity.
+
+---
+
+## 4. Feature Extraction
+
+The feature pipeline is designed to capture complementary acoustic information.
+
+### MFCC Statistics
+MFCC, delta, and delta-delta features are extracted and summarized using mean and standard deviation.
+
+### Log-Mel Statistics
+Mel spectrograms are converted to log scale and normalized with CMVN, then summarized with:
+- mean
+- standard deviation
+- median
+
+### Spectral Shape Features
+The following are extracted:
+- spectral centroid
+- spectral bandwidth
+- spectral rolloff
+- spectral flatness
+- zero crossing rate
+
+Each is summarized using mean, standard deviation, median, and percentiles.
+
+### Spectral Contrast
+Spectral contrast statistics capture texture differences between sounds.
+
+### Chroma
+Chroma features capture pitch-class distribution.
+
+### Tonnetz
+Tonnetz features provide tonal centroid representation.
+
+### RMS Energy
+RMS energy statistics represent loudness distribution and variation.
+
+### Temporal Features
+Temporal descriptors include:
+- autocorrelation peak value
+- autocorrelation peak position
+- envelope mean
+- envelope standard deviation
+- envelope difference mean
+- envelope difference standard deviation
+
+### Wide MFCC Representation
+A second MFCC representation is extracted with larger FFT and hop size settings.
+
+---
+
+## 5. Model Training
+
+The final model is a pipeline containing:
+- `StandardScaler`
+- `VotingClassifier`
+
+The ensemble includes:
+- HistGradientBoostingClassifier
+- RandomForestClassifier
+- ExtraTreesClassifier
+
+This combination was chosen to leverage the strengths of multiple model families.
+
+---
+
+## 6. Validation
+
+A stratified train-validation split is used:
+- 80% training
+- 20% validation
+
+Model performance is evaluated using:
+- classification report
+- macro-F1 score
+
+Macro-F1 is especially useful because it gives balanced importance across multiple sound classes.
+
+---
+
+## 7. Submission Prediction
+
+The trained model is used to generate predictions for all audio files in the submission set.
+
+The final CSV is written with:
+- `clip_id`
+- `predicted_label`
+
+The notebook also saves the trained model artifact using the group ID naming convention.
+
+---
+
+## 8. Reproducibility
+
+The project is reproducible because:
+- all steps are contained in a single notebook
+- dependencies are listed in `requirements.txt`
+- the dataset is downloaded programmatically
+- the model and prediction files are auto-generated
+- the group ID controls output naming in a consistent way
