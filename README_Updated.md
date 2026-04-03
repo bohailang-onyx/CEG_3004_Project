@@ -1,5 +1,7 @@
 # CEG3004 Environmental Sound Classification
-**Group:** Pr_14
+## Team
+- Group ID: Pr_14
+- Members: Chai Yong Huat and Yeo Hong Yi
 
 A robust audio classification pipeline for Environmental Sound Classification (ESC-50) that performs well under clean, noisy, and band-limited conditions.
 
