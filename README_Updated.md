@@ -91,6 +91,8 @@ Training data is augmented **7× (1 original + 6 augmented)** to simulate submis
 | Pitch shift | ±2 semitones | Pitch variability |
 | Time mask + noise | 5–15% masked | Temporal robustness |
 
+Augmenting with the exact same distortion types present in the submission set directly exposes the model to those conditions during training, rather than relying solely on feature-level robustness.
+
 ### 4. Classifier (`src/model.py`)
 
 A **hard-voting ensemble** of three diverse tree-based classifiers:
