@@ -33,7 +33,6 @@ The submission set contains 1,200 clips — 400 clean, 400 noisy, and 400 band-l
 ├── figures/                      # Visualizations generated from notebook
 │   ├── fig1.png
 │   ├── fig2.png
-
 ├── requirements.txt              # Python dependencies
 ├── .gitignore
 └── README.md
@@ -206,7 +205,7 @@ Final performance score = **50% Clean + 25% Noisy + 25% Band-limited**
 
 Shows how many times each class was predicted under each condition. Large bar height differences for the same class reveal where the model's decisions shift most under distortion.
 
-![Prediction Distribution](fig1.png)
+![Prediction Distribution](figures/fig1.png)
 
 ---
 
@@ -214,7 +213,7 @@ Shows how many times each class was predicted under each condition. Large bar he
 
 Instability score = |clean count − noisy count| + |clean count − band-limited count|. A high score means the model frequently changes its prediction for that class depending on the distortion applied.
 
-![Instability](fig2.png)
+![Instability](figures/fig2.png)
 
 
 
