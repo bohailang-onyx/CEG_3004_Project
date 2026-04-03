@@ -95,6 +95,19 @@ Augmenting with the exact same distortion types present in the submission set di
 
 ### 4. Classifier (`src/model.py`)
 
+**Why a hard-voting ensemble of tree-based classifiers?**
+
+For a 50-class classification problem with a 639-dimensional hand-crafted feature vector and ~14,000 training samples (2,000 × 7 augmentations), tree-based ensemble methods are a well-suited choice for the following reasons:
+
+- **No gradient vanishing / exploding**: Tree ensembles handle mixed-scale features natively without requiring careful architecture tuning, unlike neural networks.
+- **Robustness to irrelevant features**: Random Forest and Extra Trees use random feature subsampling at each split, which reduces the influence of noisy or less discriminative dimensions in the 639-dim vector.
+- **Complementary error patterns**: The three classifiers use fundamentally different learning strategies — sequential boosting (HGB), bootstrap aggregation (RF), and random splits (Extra Trees). Their prediction errors are less correlated, so hard voting corrects mistakes that any single model would make.
+- **Practical training time**: Gradient boosted trees with 1500 iterations and two forests of 500 trees each train in under 10 minutes on Colab, making experimentation feasible within the project timeline.
+- **No overfitting risk from augmentation leakage**: Tree models with regularization (l2, min_samples_leaf) generalize well even when augmented and original clips share the same sound identity.
+
+A neural network (e.g., CNN on mel spectrograms) could potentially achieve higher accuracy on clean data, but would require significantly more training data and careful regularization to be competitive under the noisy and band-limited conditions given the dataset size.
+
+
 A **hard-voting ensemble** of three diverse tree-based classifiers:
 
 | Classifier | Parameters |
