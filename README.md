@@ -1,7 +1,7 @@
 # CEG3004 Environmental Sound Classification
 ## Team
 - Group ID: Pr_14
-- Members: Chai Yong Huat and Yeo Hong Yi
+- Members: Chai Yong Huat 2303312 and Yeo Hong Yi 2302647
 
 ---
 
