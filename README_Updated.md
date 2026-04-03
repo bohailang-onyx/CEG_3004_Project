@@ -31,14 +31,13 @@ The submission set contains 1,200 clips — 400 clean, 400 noisy, and 400 band-l
 │   ├── model.py                  # Model building, training, evaluation
 │   └── predict.py                # Submission prediction generation
 ├── figures/                      # Visualizations generated from notebook
-│   ├── fig1_signal_comparison.png
-│   ├── fig2_prediction_distribution.png
-│   ├── fig3_instability.png
-│   ├── fig4_confusion_matrix.png
-│   └── fig5_feature_importance.png
+│   ├── fig1.png
+│   ├── fig2.png
+
 ├── requirements.txt              # Python dependencies
 ├── .gitignore
 └── README.md
+```
 ```
 
 ---
