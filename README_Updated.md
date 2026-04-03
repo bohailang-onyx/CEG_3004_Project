@@ -207,7 +207,7 @@ Final performance score = **50% Clean + 25% Noisy + 25% Band-limited**
 
 Shows how many times each class was predicted under each condition. Large bar height differences for the same class reveal where the model's decisions shift most under distortion.
 
-![Prediction Distribution](figures/fig2_prediction_distribution.png)
+![Prediction Distribution](fig1.png)
 
 ---
 
@@ -215,7 +215,7 @@ Shows how many times each class was predicted under each condition. Large bar he
 
 Instability score = |clean count − noisy count| + |clean count − band-limited count|. A high score means the model frequently changes its prediction for that class depending on the distortion applied.
 
-![Instability](figures/fig3_instability.png)
+![Instability](fig2.png)
 
 
 
