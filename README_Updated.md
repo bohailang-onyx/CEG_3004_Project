@@ -272,16 +272,4 @@ Classes with strong pitch-periodic structure (`rooster`, `siren`, `crying_baby`)
 | Transient masking (`clock_tick`) | Percentile pooling preserves frame-level peak statistics better than mean/std |
 | Low-energy class collapse (`frog`, `coughing`) | RMS normalization + silence trimming ensures consistent energy baseline |
 
----
 
-## Grading Checklist
-
-- [x] All source code in `src/`
-- [x] Clear README with DSP rationale
-- [x] Reproducible instructions (Colab + local)
-- [x] Data augmentation matching submission distortions
-- [x] Ensemble classifier with StandardScaler pipeline
-- [x] Visualizations in `figures/`
-- [x] Error analysis grounded in submission predictions
-- [x] Predictions CSV: `Pr_14_predictions.csv`
-- [x] Model file: `Pr_14_model.joblib`
