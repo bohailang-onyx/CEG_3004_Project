@@ -201,15 +201,9 @@ Final performance score = **50% Clean + 25% Noisy + 25% Band-limited**
 
 ## Visualizations
 
-### Figure 1 — Signal Comparison: Clean vs Noisy vs Band-limited
-
-Waveform and log-mel spectrogram for all three conditions on the same clip. The noisy condition raises the noise floor uniformly across all mel bands. Band-limiting visibly removes energy in the upper frequency bands above ~3 kHz.
-
-![Signal Comparison](figures/fig1_signal_comparison.png)
-
 ---
 
-### Figure 2 — Prediction Distribution Across Conditions (Top 20 Classes)
+### Figure 1 — Prediction Distribution Across Conditions (Top 20 Classes)
 
 Shows how many times each class was predicted under each condition. Large bar height differences for the same class reveal where the model's decisions shift most under distortion.
 
@@ -217,27 +211,13 @@ Shows how many times each class was predicted under each condition. Large bar he
 
 ---
 
-### Figure 3 — Per-Class Prediction Instability Under Distortion
+### Figure 2 — Per-Class Prediction Instability Under Distortion
 
 Instability score = |clean count − noisy count| + |clean count − band-limited count|. A high score means the model frequently changes its prediction for that class depending on the distortion applied.
 
 ![Instability](figures/fig3_instability.png)
 
----
 
-### Figure 4 — Confusion Matrix (15 Most Confused Classes, Validation Set)
-
-Subset of the full 50×50 confusion matrix showing the 15 classes with the lowest per-class validation accuracy. Off-diagonal entries reveal which specific class pairs are most frequently confused.
-
-![Confusion Matrix](figures/fig4_confusion_matrix.png)
-
----
-
-### Figure 5 — Feature Group Importance (Random Forest)
-
-Relative contribution of each DSP feature group to the Random Forest classifier's decisions. Confirms which parts of the 639-dimensional feature vector carry the most discriminative signal for ESC-50.
-
-![Feature Importance](figures/fig5_feature_importance.png)
 
 ---
 
